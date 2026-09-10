@@ -23,6 +23,12 @@ public class Comment {
         return comment;
     }
 
+    public static Comment create(String message) {
+        Comment comment = new Comment();
+        comment.setMessage(message);
+        return comment;
+    }
+
     public Long getId() {
         return id;
     }
