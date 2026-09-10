@@ -30,6 +30,7 @@ public class InitData implements CommandLineRunner {
         postRepository.save(post4);
 
         Comment comment1 = Comment.create("You suck", post1);
+        post1.addComment(comment1);
         commentRepository.save(comment1);
     }
 }
