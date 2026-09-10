@@ -1,9 +1,6 @@
 package ek.osnb.demo.post.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class Comment {
@@ -12,11 +9,15 @@ public class Comment {
     private Long id;
     private String message;
 
+    @ManyToOne
+    private Post post;
+
     protected Comment() {}
 
-    public static Comment create(String message) {
+    public static Comment create(String message, Post post) {
         Comment comment = new Comment();
         comment.setMessage(message);
+        comment.setPost(post);
         return comment;
     }
 
@@ -34,5 +35,13 @@ public class Comment {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public Post getPost() {
+        return post;
+    }
+
+    public void setPost(Post post) {
+        this.post = post;
     }
 }
