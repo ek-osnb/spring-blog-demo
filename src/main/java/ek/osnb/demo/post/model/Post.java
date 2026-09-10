@@ -1,16 +1,25 @@
 package ek.osnb.demo.post.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
+@JsonPropertyOrder({"id", "title", "comments"})
 public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String title;
+
+    @OneToMany(mappedBy = "post")
+    // Does not impact db tables
+    // This is only a java reference
+    @JsonManagedReference
+    private List<Comment> comments = new ArrayList<>();
 
     public Post() {}
 
@@ -34,5 +43,14 @@ public class Post {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public void addComment(Comment comment) {
+        comments.add(comment);
+        comment.setPost(this);
+    }
+
+    public List<Comment> getComments() {
+        return comments;
     }
 }
