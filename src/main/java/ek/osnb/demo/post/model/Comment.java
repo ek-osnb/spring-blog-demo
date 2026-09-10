@@ -1,5 +1,6 @@
 package ek.osnb.demo.post.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
 @Entity
@@ -10,6 +11,7 @@ public class Comment {
     private String message;
 
     @ManyToOne
+    @JsonBackReference
     private Post post;
 
     protected Comment() {}
