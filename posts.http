@@ -1,0 +1,26 @@
+### CREATE post
+POST http://localhost:8080/api/posts
+Content-Type: application/json
+
+{
+  "title": "Hello from .http file"
+}
+
+### DELETE post
+DELETE http://localhost:8080/api/posts/1
+
+### Change post
+PUT http://localhost:8080/api/posts/2
+Content-Type: application/json
+
+{
+  "title": "Updated Updated post from .http file"
+}
+
+### Add comment to post
+POST http://localhost:8080/api/posts/2/comments
+Content-Type: application/json
+
+{
+  "comment": "Hello from .http file"
+}
