@@ -1,7 +1,9 @@
 package ek.osnb.demo.post.controller;
 
+import ek.osnb.demo.post.dto.PostWithComments;
 import ek.osnb.demo.post.model.Post;
 import ek.osnb.demo.post.repository.PostRepository;
+import ek.osnb.demo.post.service.PostService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,14 +14,14 @@ import java.util.List;
 @RequestMapping("/api/posts")
 public class PostController {
 
-    private PostRepository postRepository;
+    private final PostService postService;
 
-    public PostController(PostRepository postRepository) {
-        this.postRepository = postRepository;
+    public PostController(PostService postService) {
+        this.postService = postService;
     }
 
     @GetMapping
-    List<Post> getAllPosts() {
-        return postRepository.findAll();
+    List<PostWithComments> getAllPosts() {
+        return postService.getPostsWithComments();
     }
 }
