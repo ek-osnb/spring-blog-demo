@@ -21,6 +21,9 @@ public class Post {
     @JsonManagedReference
     private List<Comment> comments = new ArrayList<>();
 
+    @Embedded
+    private Auditable audit = new Auditable();
+
     public Post() {}
 
     public static Post create(String title) {
@@ -43,11 +46,13 @@ public class Post {
 
     public void setTitle(String title) {
         this.title = title;
+        this.audit.update();
     }
 
     public void addComment(Comment comment) {
         comments.add(comment);
         comment.setPost(this);
+        this.audit.update();
     }
 
     public List<Comment> getComments() {
